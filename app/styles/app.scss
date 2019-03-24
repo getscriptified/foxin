@@ -1,3 +1,15 @@
 @import "pod-styles";
 
 /* LAYOUT */
+
+body {
+  margin-top: 60px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex--vertical {
+  flex-direction: column;
+}

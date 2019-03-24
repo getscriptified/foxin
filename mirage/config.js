@@ -1,39 +1,39 @@
+import Response from 'ember-cli-mirage/response';
+import { A } from '@ember/array';
+
 export default function() {
-
-  // These comments are here to help you get started. Feel free to delete them.
-
-  /*
-    Config (with defaults).
-
-    Note: these only affect routes defined *after* them!
-  */
-
-  // this.urlPrefix = '';    // make this `http://localhost:8080`, for example, if your API is on a different server
-  // this.namespace = '';    // make this `/api`, for example, if your API is namespaced
-  // this.timing = 400;      // delay for each request, automatically set to 0 during testing
-
-  /*
-    Shorthand cheatsheet:
-
-    this.get('/posts');
-    this.post('/posts');
-    this.get('/posts/:id');
-    this.put('/posts/:id'); // or this.patch
-    this.del('/posts/:id');
-
-    http://www.ember-cli-mirage.com/docs/v0.4.x/shorthands/
-  */
-
   this.namespace = '/api';
 
-  this.get('/rules', (schema, request) => {
-    return schema.rules.all();
+  // Get all Rules
+  this.get('/rules');
+
+  // View Specific Rule
+  this.get('/rules/:id');
+
+  // POST and PATCH
+  this.post('/rules', ( schema, request) => {
+    let attrs  = JSON.parse(request.requestBody).data.attributes,
+        errors = A();
+
+    // Validations
+    if(!attrs.name) {
+      errors.push({ "status": "403", "code": "403", "title": 'Name is empty', "detail": 'Name cannot be empty',
+        'source': { 'pointer': '/data/attributes/name'},
+      });
+    }
+
+    if(!attrs.predicate) {
+      errors.push({ "status": "403", "code": "403", "title": 'predicate is empty', "detail": 'Predicate cannot be empty',
+        'source': { 'pointer': '/data/attributes/predicate'},
+      });
+    }
+
+    if (errors.length > 0) {
+      return new Response(422, {}, { errors: errors });
+    }
+    
+    return schema.rules.create(attrs);
+
   });
-
-  this.get('/rules/:id', (schema, request) => {
-    return schema.rules.find(request.params.id);
-  });
-
-  // this.passthrough();
-
+  this.patch('/rules/:id')
 }
