@@ -4,6 +4,11 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
 
   rService : service('rules'),
+  search   : undefined,
+
+  getConditionType( value, rService ) {
+    return rService.conditionsList.find( i => i.code == value).name;
+  },
 
   actions: {
     edit(model) {

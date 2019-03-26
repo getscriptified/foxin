@@ -1,8 +1,66 @@
 & {
+  .create_rule {
+    padding: 15px;
+  }
   .form {
     &_conditions {
       padding: 10px;
       background: whitesmoke;
+      select {
+        height: 30px;
+      }
+
+      > div {
+        margin: 10px;
+      }
+    }
+
+    &_name {
+      height: 30px;
+      padding: 10px 0;
+      label {
+        @extend .flex;
+        padding-right: 10px;
+        align-items: center;
+      }
+    }
+
+    &_predicate {
+      height: 30px;
+      padding: 10px 0;
+      label {
+        @extend .flex;
+        padding-right: 10px;
+        align-items: center;
+      }
+      select {
+        height: 30px;
+      }
+    }
+
+    &_actions {
+      height: 30px;
+      padding: 10px 0;
+      label {
+        @extend .flex;
+        padding-right: 10px;
+        align-items: center;
+      }
+      select {
+        height: 30px;
+      }
+    }
+  }
+
+  .actions {
+    button {
+      margin-left: 10px;
+    }
+  }
+
+  .action {
+    button {
+      height: 30px;
     }
   }
 

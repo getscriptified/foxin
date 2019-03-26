@@ -5,7 +5,13 @@ export default function() {
   this.namespace = '/api';
 
   // GET
-  this.get('/rules');
+  this.get('/rules', (schema, request) => {
+    let search = request.queryParams.search;
+    if (search)
+      return schema.rules.where({name: search});
+
+    return schema.rules.all();
+  });
 
   // GET /:id
   this.get('/rules/:id');

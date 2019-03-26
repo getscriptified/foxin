@@ -1,0 +1,30 @@
+& {
+  .search {
+    height: 30px;
+    padding: 15px;
+    width: 100%;
+    left: 0;
+    top: 50px;
+    input {
+      font-size: 16px;
+    }
+
+    label {
+      align-items: center;
+      padding-right: 10px;
+    }
+  }
+
+  .table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+
+    td, th {
+      padding: .75rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+    }
+  }
+}

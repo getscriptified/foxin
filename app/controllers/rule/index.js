@@ -3,9 +3,10 @@ import Controller from '@ember/controller';
 import pagedArray from 'ember-cli-pagination/computed/paged-array';
 
 export default Controller.extend({
-  queryParams: ["page", "perPage"],
+  queryParams: ["page", "perPage", "search"],
   page: 1,
   perPage: 5,
+  search: "",
  
   pagedContent: pagedArray('model', {
     page: alias("parent.page"),
@@ -16,7 +17,7 @@ export default Controller.extend({
 
   actions: {
     goToEdit( model ) {
-      this.transitionToRoute('rule.edit', {id: model.id});
+      this.transitionToRoute('rule.edit', model);
     }
   }
 

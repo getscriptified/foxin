@@ -10,10 +10,16 @@ export default Component.extend({
 
   init() {
     this._super();
-    if( this.get('model') )
+    this._loadRuleModel();
+  },
+
+  _loadRuleModel() {
+    let model = this.get('model');
+    if( model )
       this.set( 'rule', this.get('model') );
     else
       this.set( 'rule', this.store.createRecord( 'rule' ) );
+
     this.get( 'rService' ).loadModel( true, this.get( 'rule' ));
   },
 
@@ -30,9 +36,9 @@ export default Component.extend({
     setField( obj, value ) {
       set( obj, 'field', value );
       if (['recieved date', 'recieved time'].includes(value))
-        this.set( 'rValue', 'number');
+        set( obj, 'fieldType', 'number');
       else
-        this.set( 'rValue', 'text');
+        set( obj, 'fieldType', 'text');
     },
 
     setCondition( obj, value ) {

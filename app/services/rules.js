@@ -14,7 +14,7 @@ var conditionsList = [{name: 'Contains', code: 'cont', type:'text'}, {name: 'Doe
 
 var actionList     = [{name: 'Mark as Read / Mark as Unread', type:'mar'},
                      {name: 'Archive message', type:'arch'}, {name: 'Add Label', type:'addLabel'}];
-var baseCondition  = { field: '', condition: '', key: '', isValid: false };
+var baseCondition  = { field: '', condition: '', key: '', isValid: false, fieldType: 'text' };
 
 
 export default Service.extend({
@@ -27,6 +27,7 @@ export default Service.extend({
   conditionsList : undefined,
   actionList     : undefined,
   store          : service(),
+  router         : service(),
   
 
   // Init
@@ -47,6 +48,10 @@ export default Service.extend({
   loadModel( resetRuleObj, rule = this.store.createRecord( 'rule' ) ) {
     if (resetRuleObj)
       this.loadNewRuleObj();
+
+    if (rule.id)
+      this.set('ruleObjs', JSON.parse( rule.get('conditions') ) );
+
     this.set( 'rule', rule );
   },
 
@@ -96,7 +101,9 @@ export default Service.extend({
   saveRule() {
     this.set('rule.conditions', this.getRulesStringified( this.get('ruleObjs') ) );
     let model = this.get('rule');
-    model.save().catch(err => err );
+    model.save().catch(err => err ).then( () => {
+      this.get('router').transitionTo('rule');
+    })
   },
 
   deleteRule( model ) {

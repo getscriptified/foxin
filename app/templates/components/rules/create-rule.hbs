@@ -12,7 +12,7 @@
       <select id="rulePredicate" onchange={{action "setSelection" value="target.value"}}>
         <option> -- Any or All? -- </option>
         {{#each rService.predicateList as | predicate |}}
-          <option value={{predicate}}>{{predicate}}</option>
+          <option value={{predicate}} selected={{eq predicate rService.rule.predicate}}>{{predicate}}</option>
         {{/each}}
       </select>
       <div class="error">
@@ -25,7 +25,7 @@
           <select id="ruleFields" onchange={{action (action "setField" ruleObj) value="target.value"}}>
             <option> Select field </option>
             {{#each rService.fieldsList as | field |}}
-              <option value={{field}}>{{field}}</option>
+              <option value={{field}} selected={{eq field ruleObj.field}}>{{field}}</option>
             {{/each}}
           </select>
         </div>
@@ -33,16 +33,16 @@
           <select id="ruleConditions" onchange={{action (action "setCondition" ruleObj) value="target.value"}}>
             <option> Select conditions </option>
             {{#each rService.conditionsList as | condition |}}
-              {{#if (eq condition.type rValue)}}
-                <option value={{condition.code}}>{{condition.name}}</option>
+              {{#if (eq condition.type ruleObj.fieldType)}}
+                <option value={{condition.code}} selected={{eq condition.code ruleObj.condition}}>{{condition.name}}</option>
               {{/if}}
             {{/each}}
           </select>
         </div>
         <div class="flex">
-          {{input type=rValue value=ruleObj.key}}
+          {{input type=ruleObj.fieldType value=ruleObj.key}}
         </div>
-        <div class="flex">
+        <div class="flex actions">
           <button {{action "addNewObj" }}>Add</button>
           <button {{action "removeNewObj" ruleObj }} disabled={{eq rService.ruleObjs.length 1}}>Remove</button>
         </div>
@@ -53,7 +53,7 @@
       <select id="ruleFields" onchange={{action (action "setAction") value="target.value"}}>
         <option> Select action </option>
         {{#each rService.actionList as | _action |}}
-          <option value={{_action.type}}>{{_action.name}}</option>
+          <option value={{_action.type}} selected={{eq _action.name rService.rule.action}}>{{_action.name}}</option>
         {{/each}}
       </select>
       <div class="error">
@@ -61,6 +61,8 @@
       </div>
     </div>
     <br>
-    <button {{action "saveRule"}}>Save</button>
+    <div class="flex action">
+      <button {{action "saveRule"}}>Save</button>
+    </div>
   </form>
 </div>
