@@ -5,7 +5,7 @@ import pagedArray from 'ember-cli-pagination/computed/paged-array';
 export default Controller.extend({
   queryParams: ["page", "perPage"],
   page: 1,
-  perPage: 10,
+  perPage: 5,
  
   pagedContent: pagedArray('model', {
     page: Ember.computed.alias("parent.page"),
