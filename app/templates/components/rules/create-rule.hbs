@@ -1,65 +1,66 @@
 <div class="flex create_rule">
   <form class="flex flex--vertical create_rule_form">
-      <div class="flex form_name">
-        <label for="ruleName">Rule Name</label>
-        {{input id="ruleName" type="text" value=rService.rule.name}}
-        <div class="error">
-          {{#each rService.rule.errors.name as |err|}} {{err.message}} {{/each}}
-        </div>
+    <div class="flex form_name">
+      <label for="ruleName">Rule Name</label>
+      {{input id="ruleName" type="text" value=rService.rule.name}}
+      <div class="error">
+        {{#each rService.rule.errors.name as |err|}} {{err.message}} {{/each}}
       </div>
-      <div class="flex form_predicate">
-        <label for="rulePredicate">Predicate</label>
-        <select id="rulePredicate" onchange={{action "setSelection" value="target.value"}}>
-         <option> -- Any or All? -- </option>
-          {{#each rService.predicateList as | predicate |}}
-            <option value={{predicate}}>{{predicate}}</option>
-          {{/each}}
-        </select>
-        <div class="error">
-          {{#each rService.rule.errors.predicate as |err|}} {{err.message}} {{/each}}
-        </div>
+    </div>
+    <div class="flex form_predicate">
+      <label for="rulePredicate">Predicate</label>
+      <select id="rulePredicate" onchange={{action "setSelection" value="target.value"}}>
+        <option> -- Any or All? -- </option>
+        {{#each rService.predicateList as | predicate |}}
+          <option value={{predicate}}>{{predicate}}</option>
+        {{/each}}
+      </select>
+      <div class="error">
+        {{#each rService.rule.errors.predicate as |err|}} {{err.message}} {{/each}}
       </div>
-      {{#each rService.ruleObjs as | ruleObj |}}
-        <div class="flex form_conditions">
-          <div class="flex">
-            <select id="ruleFields" onchange={{action (action "setField" ruleObj) value="target.value"}}>
-             <option> Select field </option>
-              {{#each rService.fieldsList as | field |}}
-                <option value={{field}}>{{field}}</option>
-              {{/each}}
-            </select>
-          </div>
-          <div class="flex">
-            <select id="ruleConditions" onchange={{action (action "setCondition" ruleObj) value="target.value"}}>
-             <option> Select conditions </option>
-              {{#each rService.conditionsList as | condition |}}
-                {{#if (eq condition.type rValue)}}
+    </div>
+    {{#each rService.ruleObjs as | ruleObj |}}
+      <div class="flex form_conditions">
+        <div class="flex">
+          <select id="ruleFields" onchange={{action (action "setField" ruleObj) value="target.value"}}>
+            <option> Select field </option>
+            {{#each rService.fieldsList as | field |}}
+              <option value={{field}}>{{field}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="flex">
+          <select id="ruleConditions" onchange={{action (action "setCondition" ruleObj) value="target.value"}}>
+            <option> Select conditions </option>
+            {{#each rService.conditionsList as | condition |}}
+              {{#if (eq condition.type rValue)}}
                 <option value={{condition.code}}>{{condition.name}}</option>
-                {{/if}}
-              {{/each}}
-            </select>
-          </div>
-          <div class="flex">
-            {{input type=rValue value=ruleObj.key}}
-          </div>
-          <div class="flex">
-            <button {{action 'addNewObj' }}>Add</button>
-            <button {{action 'removeNewObj' ruleObj }} disabled={{eq rService.ruleObjs.length 1}}>Remove</button>
-          </div>
+              {{/if}}
+            {{/each}}
+          </select>
         </div>
+        <div class="flex">
+          {{input type=rValue value=ruleObj.key}}
+        </div>
+        <div class="flex">
+          <button {{action "addNewObj" }}>Add</button>
+          <button {{action "removeNewObj" ruleObj }} disabled={{eq rService.ruleObjs.length 1}}>Remove</button>
+        </div>
+      </div>
     {{/each}}
+    
     <div class="flex form_actions">
       <select id="ruleFields" onchange={{action (action "setAction") value="target.value"}}>
         <option> Select action </option>
-          {{#each rService.actionList as | _action |}}
-            <option value={{_action.type}}>{{_action.name}}</option>
-          {{/each}}
-        </select>
-        <div class="error">
-          {{#each rService.rule.errors.action as |err|}} {{err.message}} {{/each}}
-        </div>
+        {{#each rService.actionList as | _action |}}
+          <option value={{_action.type}}>{{_action.name}}</option>
+        {{/each}}
+      </select>
+      <div class="error">
+        {{#each rService.rule.errors.action as |err|}} {{err.message}} {{/each}}
       </div>
+    </div>
     <br>
-    <button {{action 'saveRule'}}>Save</button>
+    <button {{action "saveRule"}}>Save</button>
   </form>
 </div>

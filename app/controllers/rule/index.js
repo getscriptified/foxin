@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { alias, oneWay } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import pagedArray from 'ember-cli-pagination/computed/paged-array';
 
@@ -8,11 +8,11 @@ export default Controller.extend({
   perPage: 5,
  
   pagedContent: pagedArray('model', {
-    page: Ember.computed.alias("parent.page"),
-    perPage: Ember.computed.alias("parent.perPage")
+    page: alias("parent.page"),
+    perPage: alias("parent.perPage")
   }),
  
-  totalPages: Ember.computed.oneWay("model.totalPages"),
+  totalPages: oneWay("model.totalPages"),
 
   actions: {
     goToEdit( model ) {

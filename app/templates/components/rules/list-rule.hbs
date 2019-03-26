@@ -1,10 +1,10 @@
 <table>
   <thead>
-      <th>Name</th>
-      <th>Predicate</th>
-      <th>Condition</th>
-      <th>Action</th>
-      <th></th>
+    <th>Name</th>
+    <th>Predicate</th>
+    <th>Condition</th>
+    <th>Action</th>
+    <th></th>
   </thead>
   <tbody>
     {{#each model as | data |}}
@@ -21,8 +21,8 @@
         </th>
         <th>{{data.action}}</th>
         <th>
-          <button {{action 'edit' data}}>Edit</button>
-          <button {{action 'delete' data}}>Delete</button>
+          <button {{action "edit" data}}>Edit</button>
+          <button {{action "delete" data}}>Delete</button>
         </th>
       </tr>
     {{/each}}

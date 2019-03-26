@@ -11,15 +11,15 @@ export default DS.Model.extend(Validator, {
 
   parsedData : computed('conditions', function() {
     return JSON.parse( this.get('conditions') );
-  }),
+  })
 
-  validations: {
-    name: {
-      presence: true
-    },
-    predicate: {
-      presence: true
-    }
-  }
+  // validations: {
+  //   name: {
+  //     presence: true
+  //   },
+  //   predicate: {
+  //     presence: true
+  //   }
+  // }
   
 });

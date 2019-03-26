@@ -96,7 +96,7 @@ export default Service.extend({
   saveRule() {
     this.set('rule.conditions', this.getRulesStringified( this.get('ruleObjs') ) );
     let model = this.get('rule');
-    model.save().catch((err) => { console.log('Error: saving / updating ' + model._internalModel.modelName) } );
+    model.save().catch(err => err );
   },
 
   deleteRule( model ) {
