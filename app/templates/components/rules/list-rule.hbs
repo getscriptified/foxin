@@ -20,7 +20,10 @@
           {{/each}}
         </th>
         <th>{{data.action}}</th>
-        <th><button {{action 'delete' data}}>Delete</button></th>
+        <th>
+          <button {{action 'edit' data}}>Edit</button>
+            <button {{action 'delete' data}}>Delete</button>
+        </th>
       </tr>
     {{/each}}
   </tbody>

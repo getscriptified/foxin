@@ -7,6 +7,10 @@ export default Component.extend({
   rService : service('rules'),
 
   actions: {
+    edit(model) {
+      
+    },
+    
     delete( model ) {
       this.get('rService').deleteRule( model );
     }
