@@ -10,12 +10,16 @@ export default Component.extend({
 
   init() {
     this._super();
-    this.set( 'rule', this.store.createRecord( 'rule' ) ),
+    if( this.get('model') )
+      this.set( 'rule', this.get('model') );
+    else
+      this.set( 'rule', this.store.createRecord( 'rule' ) );
     this.get( 'rService' ).loadModel( true, this.get( 'rule' ));
   },
 
   willDestroyElement() {
-    this.get('rule').rollbackAttributes();
+    if( !this.get('model.id') )
+      this.get('rule').rollbackAttributes();
   },
 
   actions: {

@@ -1,4 +1,4 @@
-// import { set } from '@ember/object'
+import { get } from '@ember/object'
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
@@ -8,9 +8,9 @@ export default Component.extend({
 
   actions: {
     edit(model) {
-      
+      this.get('goToEdit')( model );
     },
-    
+
     delete( model ) {
       this.get('rService').deleteRule( model );
     }

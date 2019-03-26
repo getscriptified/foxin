@@ -12,6 +12,12 @@ export default Controller.extend({
     perPage: Ember.computed.alias("parent.perPage")
   }),
  
-  totalPages: Ember.computed.oneWay("model.totalPages")
+  totalPages: Ember.computed.oneWay("model.totalPages"),
+
+  actions: {
+    goToEdit( model ) {
+      this.transitionToRoute('rule.edit', {id: model.id});
+    }
+  }
 
 });

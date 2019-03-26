@@ -1,8 +1,8 @@
 import { Factory, faker } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  name(i) {
-    return `Rule ${i}`;
+  name() {
+    return faker.commerce.product();
   },
 
   predicate() { return 'any' },
