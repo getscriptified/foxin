@@ -25,11 +25,14 @@ export default Component.extend({
 
     setField( obj, value ) {
       set( obj, 'field', value );
+      if (['recieved date', 'recieved time'].includes(value))
+        this.set( 'rValue', 'number');
+      else
+        this.set( 'rValue', 'text');
     },
 
     setCondition( obj, value ) {
       set( obj, 'condition', value );
-      this.set( 'rValue' ,this.get( 'rService' ).getConditionType( value ) );
     },
 
     addNewObj() {
@@ -38,6 +41,10 @@ export default Component.extend({
 
     removeNewObj( obj ) {
       this.get( 'rService' ).removeRuleObj( obj );
+    },
+
+    setAction( value ) {
+      this.set('rule.actions', value);
     },
 
     saveRule() {

@@ -4,13 +4,13 @@ import { A } from '@ember/array';
 export default function() {
   this.namespace = '/api';
 
-  // Get all Rules
+  // GET
   this.get('/rules');
 
-  // View Specific Rule
+  // GET /:id
   this.get('/rules/:id');
 
-  // POST and PATCH
+  // POST
   this.post('/rules', ( schema, request) => {
     let attrs  = JSON.parse(request.requestBody).data.attributes,
         errors = A();
@@ -28,6 +28,12 @@ export default function() {
       });
     }
 
+    if(!attrs.action) {
+      errors.push({ "status": "403", "code": "403", "title": 'action is empty', "detail": 'Action should be selected',
+        'source': { 'pointer': '/data/attributes/action'},
+      }); 
+    }
+
     if (errors.length > 0) {
       return new Response(422, {}, { errors: errors });
     }
@@ -35,5 +41,10 @@ export default function() {
     return schema.rules.create(attrs);
 
   });
-  this.patch('/rules/:id')
+
+  // PATCH
+  this.patch('/rules/:id');
+
+  // DELETE
+  this.delete('/rules/:id');
 }

@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import "pod-styles";
 
 /* LAYOUT */
 
 body {
   margin-top: 60px;
+  font-family: "Open Sans", sans-serif;
 }
 
 .flex {
@@ -12,4 +14,30 @@ body {
 
 .flex--vertical {
   flex-direction: column;
+}
+
+// Pagination
+.pagination {
+
+  .disabled {
+    pointer-events: none;
+    a {
+      color: gray;
+    }
+  }
+
+  &-centered {
+    justify-content: center;
+    display: flex;
+  }
+
+  @extend .flex;
+  list-style: none;
+
+  li {
+    padding: 5px;
+    a {
+      text-decoration: none;
+    }
+  }
 }

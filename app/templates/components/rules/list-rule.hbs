@@ -1,3 +1,27 @@
-{{#each model as | data |}}
-  {{ data.name }}
-{{/each}}
+<table>
+  <thead>
+      <th>Name</th>
+      <th>Predicate</th>
+      <th>Condition</th>
+      <th>Action</th>
+      <th></th>
+  </thead>
+  <tbody>
+    {{#each model as | data |}}
+      <tr>
+        <th>{{data.name}}</th>
+        <th>{{data.predicate}}</th>
+        <th>
+          {{#each data.parsedData as | parse |}}
+            {{#if parse.isValid}}
+              {{parse.field}} {{parse.condition}} {{parse.key}}
+            {{/if}}
+            <br>
+          {{/each}}
+        </th>
+        <th>{{data.action}}</th>
+        <th><button {{action 'delete' data}}>Delete</button></th>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
